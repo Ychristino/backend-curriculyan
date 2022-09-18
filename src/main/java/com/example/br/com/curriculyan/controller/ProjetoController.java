@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/projeto")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
 public class ProjetoController {
 
     @Autowired

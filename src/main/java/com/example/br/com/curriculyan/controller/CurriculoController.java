@@ -23,8 +23,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/curriculo")
-//@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class CurriculoController {
 
     @Autowired

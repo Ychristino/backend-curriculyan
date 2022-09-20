@@ -1,6 +1,7 @@
 package com.example.br.com.curriculyan.dto;
 
 import com.example.br.com.curriculyan.models.Curriculo;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,8 @@ public class CurriculoDto {
         return formacoes;
     }
 
-    public static List<CurriculoDto> converter(List<Curriculo> curriculos){
-        return curriculos.stream().map(CurriculoDto::new).collect(Collectors.toList());
+    public static Page<CurriculoDto> converter(Page<Curriculo> curriculos){
+        return curriculos.map(CurriculoDto::new);
     }
     public static CurriculoDto converter(Curriculo curriculo){
             return new CurriculoDto(curriculo);

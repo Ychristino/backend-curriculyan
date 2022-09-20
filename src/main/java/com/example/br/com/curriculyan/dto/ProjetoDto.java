@@ -1,6 +1,7 @@
 package com.example.br.com.curriculyan.dto;
 
 import com.example.br.com.curriculyan.models.Projeto;
+import org.springframework.data.domain.Page;
 
 import java.net.URI;
 import java.util.List;
@@ -30,8 +31,8 @@ public class ProjetoDto {
         return link;
     }
 
-    public static List<ProjetoDto> converter(List<Projeto> projeto){
-        return projeto.stream().map(ProjetoDto::new).collect(Collectors.toList());
+    public static Page<ProjetoDto> converter(Page<Projeto> projeto){
+        return projeto.map(ProjetoDto::new);
     }
     public static ProjetoDto converter(Projeto projeto){
         return new ProjetoDto(projeto);

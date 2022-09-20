@@ -12,6 +12,10 @@ import com.example.br.com.curriculyan.models.Projeto;
 import com.example.br.com.curriculyan.models.repository.CurriculoRepository;
 import com.example.br.com.curriculyan.models.repository.ProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -31,8 +35,9 @@ public class ProjetoController {
     private ProjetoRepository projetoRepository;
 
     @GetMapping
-    public List<ProjetoDto> listar(Long id){
-        List<Projeto> projeto = projetoRepository.findAll();
+    public Page<ProjetoDto> listar(Long id,
+                                   @PageableDefault(sort = "titulo",  direction = Sort.Direction.ASC) Pageable paginacao){
+        Page<Projeto> projeto = projetoRepository.findAll(paginacao);
         return ProjetoDto.converter(projeto);
     }
 

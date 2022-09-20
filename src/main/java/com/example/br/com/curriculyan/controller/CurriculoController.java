@@ -8,6 +8,10 @@ import com.example.br.com.curriculyan.models.Curriculo;
 import com.example.br.com.curriculyan.models.repository.CurriculoRepository;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -26,8 +30,10 @@ public class CurriculoController {
     private CurriculoRepository curriculoRepository;
 
     @GetMapping
-    public List<CurriculoDto> listar(Long id){
-        List<Curriculo> curriculos = curriculoRepository.findAll();
+    public Page<CurriculoDto> listar(Long id,
+                                     Pageable paginacao){
+
+        Page<Curriculo> curriculos = curriculoRepository.findAll(paginacao);
         return CurriculoDto.converter(curriculos);
     }
 

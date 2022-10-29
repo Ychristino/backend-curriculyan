@@ -14,21 +14,38 @@ public class Atributo {
     private String atributo;
     private Long curriculoId;
 
-    /*
-    public Atributo(String descricao){
-        this.descricao = descricao;
-    }
-    */
+    //CONSTRUTORES
 
+    //NECESSÁRIO A DECLARAÇÃO DE CONSTRUTOR PADRÃO PARA A UTILIZAÇÃO DO JPA
+    public Atributo(){}
+
+    //CONSTRUTOR UTILIZADO PARA CADASTRO
+    public Atributo(String atributo, Long curriculoId) {
+        this.atributo = atributo;
+        this.curriculoId = curriculoId;
+    }
+
+    //CONSTRUTOR UTILIZADO PARA ATUALIZAÇÃO
+    public Atributo(String atributo) {
+        this.atributo = atributo;
+    }
+
+    //GETTERS
     public Long getId() {
         return id;
     }
-
     public String getAtributo() {
         return atributo;
     }
-
     public Long getCurriculoId() {
         return curriculoId;
+    }
+
+    //SETTERS
+    public void setAtributo(String atributo) {
+        this.atributo = atributo;
+    }
+    public void setCurriculoId(Long curriculoId) {
+        this.curriculoId = curriculoId;
     }
 }

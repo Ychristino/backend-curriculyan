@@ -1,4 +1,4 @@
-package com.example.br.com.curriculyan.dto;
+package com.example.br.com.curriculyan.dto.token;
 
 public class TokenDto {
     private String token;

@@ -1,12 +1,11 @@
 package com.example.br.com.curriculyan.controller;
 
-import com.example.br.com.curriculyan.controller.form.CurriculoForm;
-import com.example.br.com.curriculyan.controller.form.atualizacaoCurriculoForm;
-import com.example.br.com.curriculyan.dto.CadastroCurriculoDto;
-import com.example.br.com.curriculyan.dto.CurriculoDto;
+import com.example.br.com.curriculyan.controller.form.curriculo.CurriculoForm;
+import com.example.br.com.curriculyan.controller.form.curriculo.AtualizacaoCurriculoForm;
+import com.example.br.com.curriculyan.dto.curriculo.CadastroCurriculoDto;
+import com.example.br.com.curriculyan.dto.curriculo.CurriculoDto;
 import com.example.br.com.curriculyan.models.Curriculo;
 import com.example.br.com.curriculyan.models.repository.CurriculoRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/curriculo")
-@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
+//@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
 //@CrossOrigin(origins = "http://localhost:3000")
 public class CurriculoController {
 
@@ -32,7 +31,7 @@ public class CurriculoController {
 
     @GetMapping
     public Page<CurriculoDto> listar(Long id,
-                                     Pageable paginacao){
+                                     @PageableDefault(sort = "id", size = 5, direction = Sort.Direction.ASC) Pageable paginacao){
 
         Page<Curriculo> curriculos = curriculoRepository.findAll(paginacao);
         return CurriculoDto.converter(curriculos);
@@ -49,18 +48,18 @@ public class CurriculoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<CadastroCurriculoDto> cadastrar(@RequestBody CurriculoForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<CadastroCurriculoDto> cadastrar(@RequestBody @Valid CurriculoForm form, UriComponentsBuilder uriBuilder) {
         Curriculo curriculo = form.converter();
         curriculoRepository.save(curriculo);
 
-        URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(curriculo.getId()).toUri();
+        URI uri = uriBuilder.path("/curriculo/{id}").buildAndExpand(curriculo.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new CadastroCurriculoDto(curriculo));
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<CadastroCurriculoDto> atualizar(@PathVariable Long id, @RequestBody atualizacaoCurriculoForm form){
+    public ResponseEntity<CadastroCurriculoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoCurriculoForm form){
         Optional<Curriculo> opt = curriculoRepository.findById(id);
         if (opt.isPresent()){
             Curriculo curriculo = form.atualizar(id, curriculoRepository);

@@ -2,8 +2,7 @@ package com.example.br.com.curriculyan.controller;
 
 import com.example.br.com.curriculyan.config.security.TokenService;
 import com.example.br.com.curriculyan.controller.form.LoginForm;
-import com.example.br.com.curriculyan.dto.TokenDto;
-import org.aspectj.weaver.patterns.ITokenSource;
+import com.example.br.com.curriculyan.dto.token.TokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +15,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
+//@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
 //@CrossOrigin(origins = "http://localhost:3000")
 public class AutenticacaoController {
 

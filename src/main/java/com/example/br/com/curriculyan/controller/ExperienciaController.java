@@ -1,4 +1,4 @@
-package com.example.br.com.curriculyan.controller.form;
+package com.example.br.com.curriculyan.controller;
 
 import com.example.br.com.curriculyan.controller.form.experiencia.AtualizacaoExperienciaForm;
 import com.example.br.com.curriculyan.controller.form.experiencia.ExperienciaForm;
@@ -9,17 +9,20 @@ import com.example.br.com.curriculyan.models.repository.ExperienciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/experiencia")
-@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
+//@CrossOrigin(origins = "https://curriculyan.herokuapp.com")
 //@CrossOrigin(origins = "http://localhost:3000")
 public class ExperienciaController {
 
@@ -27,10 +30,10 @@ public class ExperienciaController {
     private ExperienciaRepository experienciaRepository;
 
     @GetMapping
-    public Page<ExperienciaDto> listar(Long id,
-                                       Pageable paginacao){
+    public Page<ExperienciaDto> listar(@PageableDefault(sort = {"dataFim", "dataInicio"}, size = 10, direction = Sort.Direction.DESC) Pageable paginacao,
+                                       @RequestParam(required = true) Long curriculoId){
 
-        Page<Experiencia> experiencias = experienciaRepository.findAll(paginacao);
+        Page<Experiencia> experiencias = experienciaRepository.findAllByCurriculoId(curriculoId, paginacao);
         return ExperienciaDto.converter(experiencias);
     }
 
@@ -45,7 +48,7 @@ public class ExperienciaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<CadastroExperienciaDto> cadastrar(@RequestBody ExperienciaForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<CadastroExperienciaDto> cadastrar(@RequestBody @Valid  ExperienciaForm form, UriComponentsBuilder uriBuilder) {
         Experiencia experiencia = form.converter();
         experienciaRepository.save(experiencia);
 
@@ -56,7 +59,7 @@ public class ExperienciaController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<CadastroExperienciaDto> atualizar(@PathVariable Long id, @RequestBody AtualizacaoExperienciaForm form){
+    public ResponseEntity<CadastroExperienciaDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoExperienciaForm form){
         Optional<Experiencia> opt = experienciaRepository.findById(id);
         if (opt.isPresent()){
             Experiencia experiencia = form.atualizar(id, experienciaRepository);

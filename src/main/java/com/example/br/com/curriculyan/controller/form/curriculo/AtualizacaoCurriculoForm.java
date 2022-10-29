@@ -1,28 +1,19 @@
-package com.example.br.com.curriculyan.controller.form;
+package com.example.br.com.curriculyan.controller.form.curriculo;
 
 import com.example.br.com.curriculyan.models.Curriculo;
 import com.example.br.com.curriculyan.models.repository.CurriculoRepository;
 
-public class atualizacaoCurriculoForm {
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+public class AtualizacaoCurriculoForm {
+
+    @NotEmpty
+    @NotNull
     private String atividadesAtuais;
+    @NotEmpty
+    @NotNull
     private String atividadesExtras;
-
-    public String getAtividadesAtuais() {
-        return atividadesAtuais;
-    }
-
-    public String getAtividadesExtras() {
-        return atividadesExtras;
-    }
-
-    public void setAtividadesAtuais(String atividadesAtuais) {
-        this.atividadesAtuais = atividadesAtuais;
-    }
-
-    public void setAtividadesExtras(String atividadesExtras) {
-        this.atividadesExtras = atividadesExtras;
-    }
 
     public Curriculo converter() {
         return new Curriculo(atividadesAtuais, atividadesExtras);
@@ -33,5 +24,13 @@ public class atualizacaoCurriculoForm {
         curriculo.setAtividadesAtuais(this.atividadesAtuais);
         curriculo.setAtividadesExtras(this.atividadesExtras);
         return curriculo;
+    }
+
+    public String getAtividadesAtuais() {
+        return atividadesAtuais;
+    }
+
+    public String getAtividadesExtras() {
+        return atividadesExtras;
     }
 }

@@ -16,8 +16,11 @@ public class Projeto {
     private String descricao;
     private String link;
 
+    //CONSTRUTORES
+    //NECESSÁRIO A DECLARAÇÃO DE CONSTRUTOR PADRÃO PARA A UTILIZAÇÃO DO JPA
     public Projeto(){}
 
+    //CONSTRUTOR UTILIZADO PARA ATUALIZAÇÃO/CADASTRO
     public Projeto(String titulo, String descricao, String url) {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -28,32 +31,23 @@ public class Projeto {
     public Long getId() {
         return id;
     }
-
     public String getTitulo() {
         return titulo;
     }
-
     public String getDescricao() {
         return descricao;
     }
-
     public String getLink() {
         return link;
     }
 
     // SETTERS
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
     public void setLink(String link) {
         this.link = link;
     }

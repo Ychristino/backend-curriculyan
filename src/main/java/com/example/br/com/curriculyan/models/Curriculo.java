@@ -22,59 +22,41 @@ public class Curriculo {
     @OneToMany(mappedBy = "curriculoId")
     private List<Formacao> formacoes;
 
+    //CONSTRUTORES
+    //NECESSÁRIO A DECLARAÇÃO DE CONSTRUTOR PADRÃO PARA A UTILIZAÇÃO DO JPA
     public Curriculo(){}
 
+    //CONSTRUTOR UTILIZADO PARA ATUALIZAÇÃO/CADASTRO
     public Curriculo(String atividadesAtuais, String atividadesExtras) {
         this.atividadesAtuais = atividadesAtuais;
         this.atividadesExtras = atividadesExtras;
     }
 
+    //GETTERS
     public Long getId() {
         return id;
     }
-
     public String getAtividadesAtuais() {
         return atividadesAtuais;
     }
-
     public String getAtividadesExtras() {
         return atividadesExtras;
     }
-
     public List<Atributo> getAtributos() {
         return atributos;
     }
-
     public List<Experiencia> getExperiencias() {
         return experiencias;
     }
-
     public List<Formacao> getFormacoes() {
         return formacoes;
     }
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    //SETTEERS
     public void setAtividadesAtuais(String atividadesAtuais) {
         this.atividadesAtuais = atividadesAtuais;
     }
-
     public void setAtividadesExtras(String atividadesExtras) {
         this.atividadesExtras = atividadesExtras;
-    }
-
-    public void setAtributos(List<Atributo> atributos) {
-        this.atributos = atributos;
-    }
-
-    public void setExperiencias(List<Experiencia> experiencias) {
-        this.experiencias = experiencias;
-    }
-
-    public void setFormacoes(List<Formacao> formacoes) {
-        this.formacoes = formacoes;
     }
 }

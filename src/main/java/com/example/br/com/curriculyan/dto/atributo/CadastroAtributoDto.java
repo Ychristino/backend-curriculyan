@@ -1,4 +1,4 @@
-package com.example.br.com.curriculyan.dto;
+package com.example.br.com.curriculyan.dto.atributo;
 
 import com.example.br.com.curriculyan.models.Atributo;
 
@@ -14,6 +14,7 @@ public class CadastroAtributoDto {
         this.curriculoId = atributo.getCurriculoId();
     }
 
+    //GETTERS
     public Long getId() {
         return id;
     }

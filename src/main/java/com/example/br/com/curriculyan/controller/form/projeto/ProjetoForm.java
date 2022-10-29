@@ -1,8 +1,6 @@
-package com.example.br.com.curriculyan.controller.form;
+package com.example.br.com.curriculyan.controller.form.projeto;
 
 import com.example.br.com.curriculyan.models.Projeto;
-
-import java.net.URI;
 
 public class ProjetoForm {
     private String titulo;

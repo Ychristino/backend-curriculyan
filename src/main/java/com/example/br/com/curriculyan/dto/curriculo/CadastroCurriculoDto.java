@@ -1,10 +1,6 @@
-package com.example.br.com.curriculyan.dto;
+package com.example.br.com.curriculyan.dto.curriculo;
 
 import com.example.br.com.curriculyan.models.Curriculo;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class CadastroCurriculoDto {
 
@@ -17,14 +13,14 @@ public class CadastroCurriculoDto {
         this.atividadesAtuais = curriculo.getAtividadesAtuais();
         this.atividadesExtras = curriculo.getAtividadesExtras();
     }
+
+    //GETTERS
     public Long getId() {
         return id;
     }
-
     public String getAtividadesAtuais() {
         return atividadesAtuais;
     }
-
     public String getAtividadesExtras() {
         return atividadesExtras;
     }
